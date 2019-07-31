@@ -1,0 +1,81 @@
+@model IEnumerable<CRUD.Models.Student>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4c86aff5;
+                color: white;
+            }
+    </style>
+
+</head>
+
+<body>
+    <h2 style="text-align: -webkit-center;font-size: xx-large;padding-top: 21px;">Student List</h2>
+    <br />
+    <p style="font-size: unset; margin: 4px;">
+        @Html.ActionLink("Create New Student ", "Create")
+    </p>
+    <br />
+    <table id="customers">
+
+        <tr>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Student Email
+            </th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var listItems in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(item => listItems.studentName)</td>
+                <td>@Html.DisplayFor(item => listItems.studentEmail)</td>
+                <td>
+                    @Html.ActionLink("Eidt", "Edit", new { id = listItems.studentId }) |
+                    @Html.ActionLink("Details", "Details", new { id = listItems.studentId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = listItems.studentId })
+                </td>
+
+            </tr>
+
+        }
+
+
+    </table>
+</body>
+
+</html>
+
+
+

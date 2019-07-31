@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using CRUD.Models;
+
+
+namespace CRUD.Controllers
+{
+    public class StudentController : Controller
+    {
+        // GET: Student
+        
+          IList<Student> studentList = new List<Student> {                                           
+
+                 new Student {studentId=1, studentName="Usamah", studentEmail="usamah123@gmail.com"},
+                 new Student {studentId=2, studentName="Babar", studentEmail="babar456@gmail.com"},
+                 new Student {studentId=3, studentName="Shahzaib", studentEmail="zaibi333@gmail.com"},
+                 new Student {studentId=4, studentName="Aqib", studentEmail="choka776@gmail.com"},
+                 new Student {studentId=5, studentName="SanaUllah", studentEmail="rajasanaullah69@gmail.com"},
+                 new Student {studentId=6, studentName="Abee Mirza", studentEmail="abeemirza212@gmail.com"},
+                 new Student {studentId=7, studentName="Aman Abbasi", studentEmail="mureeboys434@gmail.com"}
+
+            };
+
+
+        public ActionResult List()
+        {
+            return View(studentList);
+        }
+
+        public ActionResult Edit(int id)
+            {
+
+               var std = studentList.Where(stList => stList.studentId == id).FirstOrDefault();
+
+               return View(std);
+            }
+
+
+
+        [HttpPost]
+        public ActionResult Edit(Student std)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("List");
+            }
+            return View(std);
+        }
+
+
+    }
+}
+
